@@ -1,0 +1,40 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://localhost:8080/ws/watchesShop/schema"
+           targetNamespace="http://localhost:8080/ws/watchesShop/schema" elementFormDefault="qualified">
+
+    <!--Describing info about request and response-->
+    <xs:element name="getWatchesByStatusRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="status" type="tns:Status"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getWatchesByStatusResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <!--for a collection of elements-->
+                <xs:element name="watchesCollection" type="tns:Watch" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!--Describing parameters of request-->
+    <xs:simpleType name="Status" final="restriction">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="AVAILABLE"/>
+            <xs:enumeration value="OUT_OF_STOCK"/>
+            <xs:enumeration value="WAITING_FOR_ARRIVAL"/>
+            <xs:enumeration value="NOT_PRODUCED_ANYMORE"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="Watch">
+        <xs:sequence>
+            <xs:element name="id" type="xs:long"/>
+            <xs:element name="title" type="xs:string"/>
+            <xs:element name="manufacturer" type="xs:string"/>
+            <xs:element name="isDigital" type="xs:boolean"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
